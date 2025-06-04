@@ -53,7 +53,7 @@ import evaluate
 # /content/LibriSpeech/test-clean/
 
 # 3.5 Confirm folder structure
-!echo "✅ Extraction complete. Contents of /content/LibriSpeech:"
+!echo " Extraction complete. Contents of /content/LibriSpeech:"
 !ls -l /content/LibriSpeech
 
 # === Cell 4: Confirm the LOCAL folders and set paths for the rest of the notebook ===
@@ -230,7 +230,7 @@ export_dir = "/content/drive/MyDrive/LibriSpeech/wav2vec2-fastapi"
 processor.save_pretrained(export_dir)
 model.save_pretrained(export_dir)
 
-print(f"✅ Model and processor saved to: {export_dir}")
+print(f" Model and processor saved to: {export_dir}")
 
 # Paths
 LIBRISPEECH_ROOT = "/content"
@@ -282,19 +282,19 @@ def prepare_batch(batch):
     batch["labels"] = processor.tokenizer(batch["text"]).input_ids
     return batch
 
-# ✅ Select a small subset from train-clean-100
+#  Select a small subset from train-clean-100
 dataset_train = dataset_train.select(range(2000))   # safe size for Colab
 
-# ✅ Keep full test-clean (small enough to fit)
+#  Keep full test-clean (small enough to fit)
 dataset_train = dataset_train.map(prepare_batch, remove_columns=["audio", "text"])
 dataset_test  = dataset_test.map(prepare_batch, remove_columns=["audio", "text"])
 
-print("✅ Preprocessing complete (subset of train, full test)")
+print(" Preprocessing complete (subset of train, full test)")
 
 from dataclasses import dataclass
 
 # === Cell D: Data Collator (for padding) ===
-from dataclasses import dataclass  # ✅ Required for @dataclass
+from dataclasses import dataclass  #  Required for @dataclass
 
 @dataclass
 class DataCollatorCTCWithPadding:
@@ -325,7 +325,7 @@ class DataCollatorCTCWithPadding:
         batch["labels"] = labels
         return batch
 
-# ✅ Instantiate the collator
+#  Instantiate the collator
 data_collator = DataCollatorCTCWithPadding(processor=processor)
 
 # === Cell E: WER Evaluation Function ===
