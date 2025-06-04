@@ -25,4 +25,6 @@ The goal is to:
 - Google Drive (for storing dataset and model checkpoints, if using Colab)
 - Git installed for cloning the repository
 - Internet access for downloading dependencies and pretrained models
+## Result
+WER score = 0.038
 
